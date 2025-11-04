@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+
+html {
+  scroll-behavior: smooth;
+}
+/* global.css */
+section[id] {
+  scroll-margin-top: 3rem; /* matches sticky navbar height */
+}
