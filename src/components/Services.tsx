@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import {
   IconBrandGoogle,
@@ -65,20 +67,22 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative z-10 py-20 mt-[10px] bg-gradient-to-b from-white via-blue-50/40 to-white dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950"
+      className="relative z-10 py-20 bg-gradient-to-b from-white via-blue-50/40 to-white dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-neutral-900 dark:text-white mb-4">
-          Our <span className="text-blue-600">Digital Marketing</span> Services
-        </h2>
-        <p className="text-center text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-12">
-          Empowering brands to grow, engage, and thrive in the digital world with
-          strategies that deliver measurable success.
-        </p>
+        <div className="text-center mb-14">
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            Our Services
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 text-lg max-w-2xl mx-auto">
+            Empowering brands to grow, engage, and thrive in the digital world
+            with strategies that deliver measurable success.
+          </p>
+        </div>
 
         {/* Service Cards */}
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <Feature key={feature.title} {...feature} index={index} />
           ))}
@@ -92,30 +96,40 @@ const Feature = ({
   title,
   description,
   icon,
+  index,
 }: {
   title: string;
   description: string;
   icon: React.ReactNode;
+  index?: number;
 }) => {
+  const gradientColors =
+    index && index % 2 === 0
+      ? "hover:shadow-blue-200/40 dark:hover:shadow-blue-600/10"
+      : "hover:shadow-indigo-200/40 dark:hover:shadow-indigo-600/10";
+
   return (
     <div
       className={cn(
-        "flex flex-col items-start justify-start rounded-2xl border border-blue-100 dark:border-blue-900 bg-white dark:bg-neutral-900 p-6 shadow-sm hover:shadow-lg hover:shadow-blue-100/40 dark:hover:shadow-blue-500/10 hover:-translate-y-1.5 transition-all duration-300 group scale-[0.95] hover:scale-[0.97]"
+        "relative flex flex-col items-start justify-start rounded-2xl border border-blue-100/40 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-sm transition-all duration-300 group transform hover:-translate-y-2 hover:scale-[1.02]",
+        gradientColors
       )}
     >
-      <div className="mb-3 p-2.5 bg-blue-50 dark:bg-blue-500/10 rounded-lg text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl bg-gradient-to-br from-blue-50/30 to-indigo-50/20 dark:from-blue-500/10 dark:to-purple-500/10 blur-xl" />
+
+      <div className="mb-4 relative z-10 p-3 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-500/20 dark:to-indigo-500/20 rounded-xl text-blue-700 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
         {icon}
       </div>
 
-      <h3 className="text-base font-semibold text-neutral-800 dark:text-neutral-100 mb-1 group-hover:text-blue-600 transition-colors duration-200">
+      <h3 className="relative z-10 text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
         {title}
       </h3>
 
-      <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      <p className="relative z-10 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
         {description}
       </p>
 
-      <div className="h-[2px] w-0 bg-blue-600 mt-3 group-hover:w-14 transition-all duration-300 rounded-full" />
+      <div className="relative z-10 mt-4 h-[2px] w-0 bg-gradient-to-r from-blue-600 to-indigo-600 group-hover:w-16 transition-all duration-300 rounded-full" />
     </div>
   );
 };
